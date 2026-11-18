@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiIBGE.MainPage"
+             Title="IBGE e Clima">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="16">
+
+            <Label Text="Consulta IBGE, Clima e Agro"
+                   FontSize="25"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" />
+
+            <Label Text="Preencha via CEP ou selecione Estado e Cidade do IBGE."
+                   HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center"
+                   TextColor="Gray" />
+
+            <!-- Busca Rápida ViaCEP -->
+            <Border StrokeShape="RoundRectangle 12" Padding="12" BackgroundColor="#F8FAFC">
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="Preenchimento Rápido por CEP (ViaCEP)" FontSize="14" FontAttributes="Bold" />
+                    <Grid ColumnDefinitions="*, Auto" ColumnSpacing="8">
+                        <Entry x:Name="CepEntry"
+                               Grid.Column="0"
+                               Placeholder="Ex.: 15600000"
+                               Keyboard="Numeric"
+                               MaxLength="9" />
+                        <Button x:Name="BuscarCepRapidoButton"
+                                Grid.Column="1"
+                                Text="Buscar CEP"
+                                BackgroundColor="#0284C7"
+                                TextColor="White"
+                                Clicked="BuscarCepRapidoButton_Clicked" />
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Formulário IBGE -->
+            <Label Text="Logradouro" FontSize="16" FontAttributes="Bold" />
+            <Entry x:Name="LogradouroEntry"
+                   Placeholder="Ex.: Avenida Brasil, 100" />
+
+            <Label Text="Estado (IBGE)" FontSize="16" FontAttributes="Bold" />
+            <Picker x:Name="EstadoPicker"
+                    Title="Selecione um estado"
+                    ItemDisplayBinding="{Binding ESTSTRDESCRICAO}"
+                    SelectedIndexChanged="EstadoPicker_SelectedIndexChanged" />
+
+            <Label Text="Cidade (IBGE)" FontSize="16" FontAttributes="Bold" />
+            <Picker x:Name="CidadePicker"
+                    Title="Selecione uma cidade"
+                    ItemDisplayBinding="{Binding CIDSTRDESCRICAO}" />
+
+            <Label x:Name="LblRegiaoSelecionada"
+                   Text="Região: --"
+                   FontSize="14"
+                   FontAttributes="Italic"
+                   TextColor="#1565C0" />
+
+            <Label x:Name="LblMsg"
+                   FontSize="14"
+                   TextColor="Crimson"
+                   HorizontalOptions="Center" />
+
+            <Button x:Name="ConsultarButton"
+                    Text="Consultar Clima, Região e Nutrição"
+                    BackgroundColor="#1565C0"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="10"
+                    HeightRequest="48"
+                    Clicked="ConsultarButton_Clicked" />
+
+            <Button x:Name="LimparButton"
+                    Text="Limpar Formulário"
+                    BackgroundColor="#64748B"
+                    TextColor="White"
+                    CornerRadius="10"
+                    Clicked="LimparButton_Clicked" />
+
+            <ActivityIndicator x:Name="LoadingIndicator"
+                               IsRunning="False"
+                               IsVisible="False"
+                               HorizontalOptions="Center" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
