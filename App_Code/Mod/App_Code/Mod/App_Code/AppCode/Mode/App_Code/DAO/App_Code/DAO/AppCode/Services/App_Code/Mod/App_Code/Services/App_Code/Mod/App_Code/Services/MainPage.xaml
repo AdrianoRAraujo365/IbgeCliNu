@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiIBGE.MainPage"
+             Title="IBGE e Clima">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="24"
+            Spacing="16">
+
+            <Label
+                Text="Consulta IBGE e Clima"
+                FontSize="26"
+                FontAttributes="Bold"
+                HorizontalOptions="Center" />
+
+            <Label
+                Text="Informe o endereço e consulte a previsão de hoje."
+                HorizontalOptions="Center"
+                TextColor="Gray" />
+
+            <Label Text="Logradouro" FontSize="16" FontAttributes="Bold" />
+            <Entry
+                x:Name="LogradouroEntry"
+                Placeholder="Ex.: Avenida Brasil, 100" />
+
+            <Label Text="Estado" FontSize="16" FontAttributes="Bold" />
+            <Picker
+                x:Name="EstadoPicker"
+                Title="Selecione um estado"
+                ItemDisplayBinding="{Binding ESTSTRDESCRICAO}"
+                SelectedIndexChanged="EstadoPicker_SelectedIndexChanged" />
+
+            <Label Text="Cidade" FontSize="16" FontAttributes="Bold" />
+            <Picker
+                x:Name="CidadePicker"
+                Title="Selecione uma cidade"
+                ItemDisplayBinding="{Binding CIDSTRDESCRICAO}" />
+
+            <Button
+                x:Name="ConsultarButton"
+                Text="Consultar clima"
+                BackgroundColor="#1565C0"
+                TextColor="White"
+                FontAttributes="Bold"
+                CornerRadius="8"
+                Clicked="ConsultarButton_Clicked" />
+
+            <ActivityIndicator
+                x:Name="LoadingIndicator"
+                IsRunning="False"
+                IsVisible="False"
+                HorizontalOptions="Center" />
+
+            <VerticalStackLayout
+                x:Name="ResultadoLayout"
+                IsVisible="False"
+                Spacing="14">
+
+                <Label
+                    x:Name="EnderecoLabel"
+                    FontSize="18"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center" />
+
+                <!-- Linha 1: Temperatura Média, Máxima e Mínima -->
+                <Grid
+                    ColumnDefinitions="*,*,*"
+                    ColumnSpacing="8">
+                    <Border Grid.Column="0" Padding="10" StrokeShape="RoundRectangle 10" BackgroundColor="#F0F9FF">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="Média" FontSize="13" TextColor="DimGray" HorizontalOptions="Center" />
+                            <Label x:Name="MediaLabel" FontSize="19" FontAttributes="Bold" TextColor="#0284C7" HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Grid.Column="1" Padding="10" StrokeShape="RoundRectangle 10" BackgroundColor="#FEF2F2">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="Máxima" FontSize="13" TextColor="DimGray" HorizontalOptions="Center" />
+                            <Label x:Name="MaximaLabel" FontSize="19" FontAttributes="Bold" TextColor="#DC2626" HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Grid.Column="2" Padding="10" StrokeShape="RoundRectangle 10" BackgroundColor="#EFF6FF">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="Mínima" FontSize="13" TextColor="DimGray" HorizontalOptions="Center" />
+                            <Label x:Name="MinimaLabel" FontSize="19" FontAttributes="Bold" TextColor="#2563EB" HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+                    </Border>
+                </Grid>
+
+                <!-- Linha 2: Umidade e Pressão Atmosférica -->
+                <Grid
+                    ColumnDefinitions="*,*"
+                    ColumnSpacing="8">
+                    <Border Grid.Column="0" Padding="10" StrokeShape="RoundRectangle 10" BackgroundColor="#ECFDF5">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="Umidade" FontSize="13" TextColor="DimGray" HorizontalOptions="Center" />
+                            <Label x:Name="UmidadeLabel" FontSize="19" FontAttributes="Bold" TextColor="#059669" HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <Border Grid.Column="1" Padding="10" StrokeShape="RoundRectangle 10" BackgroundColor="#F5F3FF">
+                        <VerticalStackLayout Spacing="4">
+                            <Label Text="Pressão Atmosférica" FontSize="13" TextColor="DimGray" HorizontalOptions="Center" />
+                            <Label x:Name="PressaoLabel" FontSize="19" FontAttributes="Bold" TextColor="#7C3AED" HorizontalOptions="Center" />
+                        </VerticalStackLayout>
+                    </Border>
+                </Grid>
+
+                <!-- Mapa de Calor (Leaflet.heat) e Gráfico de 5 dias (Chart.js) -->
+                <Label Text="Mapa de Calor e Previsão (5 dias)"
+                       FontSize="15"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center" />
+
+                <Border StrokeShape="RoundRectangle 12" HeightRequest="450" Padding="4">
+                    <WebView x:Name="MapaCalorWebView" />
+                </Border>
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
