@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiIBGE.Views.ViaCepPage"
+             Title="ViaCEP">
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="16">
+            <Label Text="Consulta de Endereço (ViaCEP)"
+                   FontSize="24"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" />
+
+            <Grid ColumnDefinitions="*, Auto" ColumnSpacing="10">
+                <Entry x:Name="CepEntry"
+                       Grid.Column="0"
+                       Placeholder="Digite o CEP (ex: 01001000)"
+                       Keyboard="Numeric"
+                       MaxLength="9" />
+                <Button x:Name="BuscarCepButton"
+                        Grid.Column="1"
+                        Text="Buscar"
+                        BackgroundColor="#1565C0"
+                        TextColor="White"
+                        Clicked="BuscarCepButton_Clicked" />
+            </Grid>
+
+            <ActivityIndicator x:Name="LoadingIndicator" IsVisible="False" IsRunning="False" HorizontalOptions="Center" />
+
+            <Border Stroke="#E0E0E0" StrokeThickness="1" StrokeShape="RoundRectangle 12" Padding="16">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Logradouro" FontSize="12" TextColor="Gray" />
+                    <Entry x:Name="LogradouroEntry" IsReadOnly="True" />
+
+                    <Label Text="Bairro" FontSize="12" TextColor="Gray" />
+                    <Entry x:Name="BairroEntry" IsReadOnly="True" />
+
+                    <Grid ColumnDefinitions="2*, *" ColumnSpacing="10">
+                        <VerticalStackLayout Grid.Column="0" Spacing="4">
+                            <Label Text="Cidade" FontSize="12" TextColor="Gray" />
+                            <Entry x:Name="CidadeEntry" IsReadOnly="True" />
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Grid.Column="1" Spacing="4">
+                            <Label Text="Estado (UF)" FontSize="12" TextColor="Gray" />
+                            <Entry x:Name="EstadoEntry" IsReadOnly="True" />
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="*, *" ColumnSpacing="10">
+                        <VerticalStackLayout Grid.Column="0" Spacing="4">
+                            <Label Text="DDD" FontSize="12" TextColor="Gray" />
+                            <Entry x:Name="DddEntry" IsReadOnly="True" />
+                        </VerticalStackLayout>
+
+                        <VerticalStackLayout Grid.Column="1" Spacing="4">
+                            <Label Text="Código IBGE" FontSize="12" TextColor="Gray" />
+                            <Entry x:Name="IbgeEntry" IsReadOnly="True" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
